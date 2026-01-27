@@ -90,7 +90,7 @@ export default function Home() {
                   View Resume
                 </Link>
                 <Link
-                    href="https://github.com/your-github"
+                    href="http://www.linkedin.com/in/angel-uribe-777066267"
                     target="_blank"
                     className="inline-flex items-center gap-2 rounded-full border border-slate-500/70 text-slate-100 px-5 py-2 text-xs sm:text-sm hover:border-slate-100 hover:bg-slate-900/40 transition"
                 >
