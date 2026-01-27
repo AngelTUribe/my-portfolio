@@ -16,7 +16,7 @@ type Dot = {
 export default function NameParticles() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const dotsRef = useRef<Dot[]>([])
-  const mouseRef = useRef<{ x: number; y: number; down: boolean }>({
+  const pointerRef = useRef<{ x: number; y: number; down: boolean }>({
     x: -9999,
     y: -9999,
     down: false,
@@ -30,10 +30,11 @@ export default function NameParticles() {
     const ctx = canvas.getContext("2d", { willReadFrequently: true })
     if (!ctx) return
 
-    const isCoarsePointer =
+    const isMobileLike =
       typeof window !== "undefined" &&
       window.matchMedia &&
-      window.matchMedia("(pointer: coarse)").matches
+      (window.matchMedia("(pointer: coarse)").matches ||
+        window.matchMedia("(hover: none)").matches)
 
     const MAX_DOTS = 1400
 
@@ -67,8 +68,8 @@ export default function NameParticles() {
           const alpha = imageData[idx + 3]
           if (alpha > 80) {
             rawDots.push({
-              x: x + (Math.random() - 0.5) * 6,
-              y: y + (Math.random() - 0.5) * 6,
+              x,
+              y,
               originX: x,
               originY: y,
               vx: 0,
@@ -94,14 +95,10 @@ export default function NameParticles() {
       startRef.current = null
     }
 
-    const drawStatic = () => {
+    const drawFullyStaticOnce = () => {
       const width = canvas.width
       const height = canvas.height
       const dots = dotsRef.current
-
-      if (!startRef.current) startRef.current = performance.now() / 1000
-      const now = performance.now() / 1000
-      const t = now - startRef.current
 
       ctx.clearRect(0, 0, width, height)
 
@@ -109,25 +106,16 @@ export default function NameParticles() {
 
       for (let i = 0; i < dots.length; i++) {
         const d = dots[i]
-
-        const fade = t <= d.delay ? 0 : Math.min(1, (t - d.delay) / 0.5)
-        if (fade <= 0) continue
-
-        const breath = 0.85 + 0.25 * Math.sin((t + d.phase) * 2.2)
-        const alpha = 0.25 + 0.55 * fade * breath
-
         ctx.beginPath()
         ctx.arc(d.originX, d.originY, 1.8, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(199,210,254,${alpha})`
+        ctx.fillStyle = "rgba(199,210,254,0.75)"
         ctx.fill()
       }
 
       for (let i = 0; i < dots.length; i++) {
         const d1 = dots[i]
-        const fade1 = t <= d1.delay ? 0 : Math.min(1, (t - d1.delay) / 0.5)
-        if (fade1 <= 0.4) continue
-
         let connections = 0
+
         for (let j = i + 1; j < dots.length && connections < 5; j++) {
           const d2 = dots[j]
           const dx = d1.originX - d2.originX
@@ -136,7 +124,7 @@ export default function NameParticles() {
 
           if (distSq < maxDist * maxDist) {
             connections++
-            const alpha = 0.12 * (1 - distSq / (maxDist * maxDist)) * fade1
+            const alpha = 0.12 * (1 - distSq / (maxDist * maxDist))
             ctx.beginPath()
             ctx.moveTo(d1.originX, d1.originY)
             ctx.lineTo(d2.originX, d2.originY)
@@ -146,15 +134,13 @@ export default function NameParticles() {
           }
         }
       }
-
-      animationRef.current = requestAnimationFrame(drawStatic)
     }
 
     const renderInteractive = () => {
       const width = canvas.width
       const height = canvas.height
       const dots = dotsRef.current
-      const mouse = mouseRef.current
+      const pointer = pointerRef.current
 
       if (!startRef.current) startRef.current = performance.now() / 1000
       const now = performance.now() / 1000
@@ -169,8 +155,8 @@ export default function NameParticles() {
       for (let i = 0; i < dots.length; i++) {
         const d = dots[i]
 
-        const dx = d.x - mouse.x
-        const dy = d.y - mouse.y
+        const dx = d.x - pointer.x
+        const dy = d.y - pointer.y
         const dist = Math.sqrt(dx * dx + dy * dy) || 1
 
         if (dist < repelRadius) {
@@ -181,7 +167,7 @@ export default function NameParticles() {
           d.vy += ny * force * 1.1
         }
 
-        if (mouse.down && dist < dragRadius) {
+        if (pointer.down && dist < dragRadius) {
           const pull = (dragRadius - dist) / dragRadius
           d.vx -= (dx / dist) * pull * 1.4
           d.vy -= (dy / dist) * pull * 1.4
@@ -241,53 +227,58 @@ export default function NameParticles() {
       animationRef.current = requestAnimationFrame(renderInteractive)
     }
 
-    const handleMove = (e: MouseEvent) => {
+    const updatePointerFromEvent = (clientX: number, clientY: number) => {
       const rect = canvas.getBoundingClientRect()
-      mouseRef.current.x = e.clientX - rect.left
-      mouseRef.current.y = e.clientY - rect.top
+      pointerRef.current.x = clientX - rect.left
+      pointerRef.current.y = clientY - rect.top
     }
 
-    const handleLeave = () => {
-      mouseRef.current.x = -9999
-      mouseRef.current.y = -9999
-      mouseRef.current.down = false
+    const handlePointerMove = (e: PointerEvent) => {
+      updatePointerFromEvent(e.clientX, e.clientY)
     }
 
-    const handleDown = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect()
-      mouseRef.current.x = e.clientX - rect.left
-      mouseRef.current.y = e.clientY - rect.top
-      mouseRef.current.down = true
+    const handlePointerLeave = () => {
+      pointerRef.current.x = -9999
+      pointerRef.current.y = -9999
+      pointerRef.current.down = false
     }
 
-    const handleUp = () => {
-      mouseRef.current.down = false
+    const handlePointerDown = (e: PointerEvent) => {
+      updatePointerFromEvent(e.clientX, e.clientY)
+      pointerRef.current.down = true
+    }
+
+    const handlePointerUp = () => {
+      pointerRef.current.down = false
     }
 
     window.addEventListener("resize", createDotsFromText)
 
     createDotsFromText()
 
-    if (isCoarsePointer) {
-      drawStatic()
-    } else {
-      canvas.addEventListener("mousemove", handleMove)
-      canvas.addEventListener("mouseleave", handleLeave)
-      canvas.addEventListener("mousedown", handleDown)
-      window.addEventListener("mouseup", handleUp)
-      renderInteractive()
+    if (isMobileLike) {
+      if (animationRef.current) cancelAnimationFrame(animationRef.current)
+      animationRef.current = null
+      drawFullyStaticOnce()
+      return () => {
+        window.removeEventListener("resize", createDotsFromText)
+        if (animationRef.current) cancelAnimationFrame(animationRef.current)
+      }
     }
+
+    canvas.addEventListener("pointermove", handlePointerMove)
+    canvas.addEventListener("pointerleave", handlePointerLeave)
+    canvas.addEventListener("pointerdown", handlePointerDown)
+    window.addEventListener("pointerup", handlePointerUp)
+
+    renderInteractive()
 
     return () => {
       window.removeEventListener("resize", createDotsFromText)
-
-      if (!isCoarsePointer) {
-        canvas.removeEventListener("mousemove", handleMove)
-        canvas.removeEventListener("mouseleave", handleLeave)
-        canvas.removeEventListener("mousedown", handleDown)
-        window.removeEventListener("mouseup", handleUp)
-      }
-
+      canvas.removeEventListener("pointermove", handlePointerMove)
+      canvas.removeEventListener("pointerleave", handlePointerLeave)
+      canvas.removeEventListener("pointerdown", handlePointerDown)
+      window.removeEventListener("pointerup", handlePointerUp)
       if (animationRef.current) cancelAnimationFrame(animationRef.current)
     }
   }, [])
