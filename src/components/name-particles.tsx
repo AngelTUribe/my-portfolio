@@ -252,33 +252,16 @@ export default function NameParticles() {
       pointerRef.current.down = false
     }
 
-    let lastW = 0
-    let lastH = 0
+    window.addEventListener("resize", createDotsFromText)
 
-    const rebuildIfSizeChanged = () => {
-      const w = canvas.clientWidth
-      const h = canvas.clientHeight
-      if (!w || !h) return
-      if (w === lastW && h === lastH) return
-      lastW = w
-      lastH = h
-
-      createDotsFromText()
-
-      if (isMobileLike) {
-        if (animationRef.current) cancelAnimationFrame(animationRef.current)
-        animationRef.current = null
-        drawFullyStaticOnce()
-      }
-    }
-
-    window.addEventListener("resize", rebuildIfSizeChanged)
-
-    rebuildIfSizeChanged()
+    createDotsFromText()
 
     if (isMobileLike) {
+      if (animationRef.current) cancelAnimationFrame(animationRef.current)
+      animationRef.current = null
+      drawFullyStaticOnce()
       return () => {
-        window.removeEventListener("resize", rebuildIfSizeChanged)
+        window.removeEventListener("resize", createDotsFromText)
         if (animationRef.current) cancelAnimationFrame(animationRef.current)
       }
     }
@@ -291,7 +274,7 @@ export default function NameParticles() {
     renderInteractive()
 
     return () => {
-      window.removeEventListener("resize", rebuildIfSizeChanged)
+      window.removeEventListener("resize", createDotsFromText)
       canvas.removeEventListener("pointermove", handlePointerMove)
       canvas.removeEventListener("pointerleave", handlePointerLeave)
       canvas.removeEventListener("pointerdown", handlePointerDown)
