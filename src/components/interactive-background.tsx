@@ -37,7 +37,6 @@ function WaveField() {
         const colorMid = new THREE.Color("#4f46e5")   // indigo
         const colorHigh = new THREE.Color("#a855f7")  // magenta
 
-        // Slightly smaller than before -> higher density in view
         const width = 90
         const depth = 90
 
@@ -102,7 +101,6 @@ function WaveField() {
                     Math.cos(nz * 1.4 - time * 0.8) +
                     Math.sin((nx * nx + nz * nz) * 0.25 + time * 0.6)
 
-                // a bit strong but not insane
                 const y = wave * 2.8
 
                 posAttr.setY(i, y)
@@ -111,7 +109,6 @@ function WaveField() {
             posAttr.needsUpdate = true
         }
 
-        // Wavefield spin: more visible but not chaotic
         const g = groupRef.current
         if (g) {
             g.rotation.x = -0.9
@@ -122,13 +119,12 @@ function WaveField() {
             g.rotation.z = Math.sin(time * 0.12) * 0.05
         }
 
-        // Camera: less extreme zoom out so effect always readable
         const cam = state.camera
 
         const start = {
             x: -18,
             y: 22,
-            z: 46, // closer than 60 → more visible at top
+            z: 46, 
         }
 
         const end = {
