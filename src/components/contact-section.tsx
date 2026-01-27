@@ -1,11 +1,10 @@
-import { Mail, Github, Linkedin, Twitter } from "lucide-react"
+import { Mail, Github, Linkedin } from "lucide-react"
 
 export default function ContactSection() {
   const socialLinks = [
-    { icon: Mail, href: "mailto:angel@example.com", label: "Email" },
-    { icon: Github, href: "https://github.com/your-github", label: "GitHub" },
-    { icon: Linkedin, href: "https://www.linkedin.com/in/your-linkedin", label: "LinkedIn" },
-    { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
+    { icon: Mail, href: "atu42461@uga.edu", label: "Email" },
+    { icon: Github, href: "http://www.linkedin.com/in/angel-uribe-777066267", label: "GitHub" },
+    { icon: Linkedin, href: "www.linkedin.com/in/angel-t-uribe", label: "LinkedIn" },
   ]
 
   return (
