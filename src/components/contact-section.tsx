@@ -1,11 +1,13 @@
 import { Mail, Github, Linkedin } from "lucide-react"
 
 export default function ContactSection() {
-  const socialLinks = [
-    { icon: Mail, href: "atu42461@uga.edu", label: "Email" },
-    { icon: Github, href: "http://www.linkedin.com/in/angel-uribe-777066267", label: "GitHub" },
-    { icon: Linkedin, href: "www.linkedin.com/in/angel-t-uribe", label: "LinkedIn" },
-  ]
+    const socialLinks = [
+  { icon: Mail, href: "mailto:atu42461@uga.edu", label: "Email" }, 
+  
+  { icon: Github, href: "https://github.com/AngelTUribe", label: "GitHub" }, 
+  
+  { icon: Linkedin, href: "https://www.linkedin.com/in/angel-uribe-777066267", label: "LinkedIn" }, 
+]
 
   return (
       <section className="py-20 px-4 sm:px-6 lg:px-8 border-t border-slate-800/70">
@@ -15,7 +17,7 @@ export default function ContactSection() {
               Let&apos;s Connect
             </h2>
             <p className="text-lg text-slate-300">
-              Have a project in mind or want to talk systems and visualization? Reach out.
+              Contact me with any questions, opportunities, or just to say hi! I&apos;m always open to connecting with fellow developers, potential collaborators, or anyone interested in my work. 
             </p>
           </div>
 
