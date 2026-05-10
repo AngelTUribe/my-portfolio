@@ -64,7 +64,6 @@ export default function Home() {
               </motion.p>
 
               <NameParticles />
-              <NameParticles />
 
 {/* Mobile-only notice */}
 <motion.p
