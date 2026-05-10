@@ -5,11 +5,10 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
 interface Project {
-  id: string
   title: string
   description: string
   tags: string[]
-  link: string
+  href: string
 }
 
 interface ProjectsGridProps {
@@ -34,7 +33,7 @@ export default function ProjectsGrid({ projects }: ProjectsGridProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {projects.map((project, index) => (
                 <motion.div
-                    key={project.id}
+                    key={project.title}
                     initial={{ opacity: 0, y: 18 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -65,7 +64,7 @@ export default function ProjectsGrid({ projects }: ProjectsGridProps) {
                     </div>
                     <div className="mt-2">
                       <Link
-                          href={project.link}
+                          href={project.href}
                           target="_blank"
                           className="inline-flex items-center gap-1.5 text-[10px] font-medium text-indigo-400 group-hover:text-indigo-300 transition-all"
                       >
