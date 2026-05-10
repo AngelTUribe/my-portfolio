@@ -38,6 +38,47 @@ export default function NameParticles() {
 
     const MAX_DOTS = 1400
 
+    const drawFullyStaticOnce = () => {
+      const width = canvas.width
+      const height = canvas.height
+      const dots = dotsRef.current
+
+      ctx.clearRect(0, 0, width, height)
+
+      const maxDist = 30
+
+      for (let i = 0; i < dots.length; i++) {
+        const d = dots[i]
+        ctx.beginPath()
+        ctx.arc(d.originX, d.originY, 1.8, 0, Math.PI * 2)
+        ctx.fillStyle = "rgba(199,210,254,0.75)"
+        ctx.fill()
+      }
+
+      for (let i = 0; i < dots.length; i++) {
+        const d1 = dots[i]
+        let connections = 0
+
+        for (let j = i + 1; j < dots.length && connections < 5; j++) {
+          const d2 = dots[j]
+          const dx = d1.originX - d2.originX
+          const dy = d1.originY - d2.originY
+          const distSq = dx * dx + dy * dy
+
+          if (distSq < maxDist * maxDist) {
+            connections++
+            const alpha = 0.12 * (1 - distSq / (maxDist * maxDist))
+            ctx.beginPath()
+            ctx.moveTo(d1.originX, d1.originY)
+            ctx.lineTo(d2.originX, d2.originY)
+            ctx.strokeStyle = `rgba(129,140,248,${alpha})`
+            ctx.lineWidth = 0.4
+            ctx.stroke()
+          }
+        }
+      }
+    }
+
     const createDotsFromText = () => {
       const width = canvas.clientWidth
       const height = canvas.clientHeight
@@ -93,46 +134,9 @@ export default function NameParticles() {
       dotsRef.current = dots
       ctx.clearRect(0, 0, width, height)
       startRef.current = null
-    }
 
-    const drawFullyStaticOnce = () => {
-      const width = canvas.width
-      const height = canvas.height
-      const dots = dotsRef.current
-
-      ctx.clearRect(0, 0, width, height)
-
-      const maxDist = 30
-
-      for (let i = 0; i < dots.length; i++) {
-        const d = dots[i]
-        ctx.beginPath()
-        ctx.arc(d.originX, d.originY, 1.8, 0, Math.PI * 2)
-        ctx.fillStyle = "rgba(199,210,254,0.75)"
-        ctx.fill()
-      }
-
-      for (let i = 0; i < dots.length; i++) {
-        const d1 = dots[i]
-        let connections = 0
-
-        for (let j = i + 1; j < dots.length && connections < 5; j++) {
-          const d2 = dots[j]
-          const dx = d1.originX - d2.originX
-          const dy = d1.originY - d2.originY
-          const distSq = dx * dx + dy * dy
-
-          if (distSq < maxDist * maxDist) {
-            connections++
-            const alpha = 0.12 * (1 - distSq / (maxDist * maxDist))
-            ctx.beginPath()
-            ctx.moveTo(d1.originX, d1.originY)
-            ctx.lineTo(d2.originX, d2.originY)
-            ctx.strokeStyle = `rgba(129,140,248,${alpha})`
-            ctx.lineWidth = 0.4
-            ctx.stroke()
-          }
-        }
+      if (isMobileLike) {
+        drawFullyStaticOnce()
       }
     }
 

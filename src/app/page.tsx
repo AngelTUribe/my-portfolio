@@ -64,6 +64,17 @@ export default function Home() {
               </motion.p>
 
               <NameParticles />
+              <NameParticles />
+
+{/* Mobile-only notice */}
+<motion.p
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ delay: 0.5, duration: 0.5 }}
+    className="text-[10px] sm:hidden text-indigo-300/70 tracking-wider mb-6 -mt-2"
+>
+  (View on desktop for interactive particle physics)
+</motion.p>
 
               <motion.p
                   initial={{ opacity: 0, y: 8 }}
