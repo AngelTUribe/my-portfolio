@@ -83,28 +83,28 @@ export default function Home() {
                   className="flex flex-wrap justify-center gap-3"
               >
                 <Link
-                    href="/resume.pdf"
-                    className="inline-flex items-center gap-2 rounded-full bg-slate-50 text-slate-900 px-6 py-2 text-xs sm:text-sm font-medium hover:bg-slate-200 transition"
-                >
-                  <FileText size={16} />
-                  View Resume
-                </Link>
-                <Link
-                    href="http://www.linkedin.com/in/angel-uribe-777066267"
-                    target="_blank"
-                    className="inline-flex items-center gap-2 rounded-full border border-slate-500/70 text-slate-100 px-5 py-2 text-xs sm:text-sm hover:border-slate-100 hover:bg-slate-900/40 transition"
-                >
-                  <GitHub size={16} />
-                  GitHub
-                </Link>
-                <Link
-                    href="https://www.linkedin.com/in/your-linkedin"
-                    target="_blank"
-                    className="inline-flex items-center gap-2 rounded-full border border-slate-500/70 text-slate-100 px-5 py-2 text-xs sm:text-sm hover:border-slate-100 hover:bg-slate-900/40 transition"
-                >
-                  <Linkedin size={16} />
-                  LinkedIn
-                </Link>
+                href="/resume.pdf"
+                className="inline-flex items-center gap-2 rounded-full bg-slate-50 text-slate-900 px-6 py-2 text-xs sm:text-sm font-medium hover:bg-slate-200 transition"
+              >
+              <FileText size={16} />
+               View Resume
+              </Link>
+              <Link
+               href="https://github.com/YOUR_GITHUB_USERNAME" // <-- Add your actual GitHub URL here
+               target="_blank"
+                className="inline-flex items-center gap-2 rounded-full border border-slate-500/70 text-slate-100 px-5 py-2 text-xs sm:text-sm hover:border-slate-100 hover:bg-slate-900/40 transition"
+              >
+               <GitHub size={16} />
+               GitHub
+              </Link>
+              <Link
+               href="https://www.linkedin.com/in/angel-uribe-777066267" // <-- Moved your LinkedIn link here
+              target="_blank"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-500/70 text-slate-100 px-5 py-2 text-xs sm:text-sm hover:border-slate-100 hover:bg-slate-900/40 transition"
+              >
+              <Linkedin size={16} />
+             LinkedIn
+              </Link>
               </motion.div>
             </div>
           </motion.section>
