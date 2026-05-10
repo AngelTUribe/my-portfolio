@@ -9,32 +9,9 @@ import AboutSection from "@/components/about-section"
 import ContactSection from "@/components/contact-section"
 import NameParticles from "@/components/name-particles"
 
-const projects = [
-  {
-    id: "1",
-    title: "Building Output Analyzer (UPS)",
-    description:
-        "Internal UPS visualization tool mapping outbound volume with interactive maps, line charts, and anomaly surfacing.",
-    tags: ["React", "TypeScript", "D3.js", "Node.js", "MySQL"],
-    link: "https://github.com/your-bmo-link-or-demo",
-  },
-  {
-    id: "2",
-    title: "Smart City Traffic Optimization",
-    description:
-        "Reinforcement learning system using PPO to coordinate intersections and reduce congestion in a simulated network.",
-    tags: ["Python", "Reinforcement Learning", "PPO"],
-    link: "https://github.com/your-traffic-link",
-  },
-  {
-    id: "3",
-    title: "Interactive Portfolio",
-    description:
-        "This site: motion-heavy, 3D background, and focused storytelling aimed at hiring managers and engineers.",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS"],
-    link: "https://github.com/your-portfolio-repo",
-  },
-]
+// 1. We import the projects from your centralized file instead of hardcoding them!
+// Note: If you get a path error here, change it to "../project" or "../../project" depending on where your file is.
+import { projects } from "@/project" 
 
 export default function Home() {
   const { scrollYProgress } = useScroll()
@@ -65,25 +42,24 @@ export default function Home() {
 
               <NameParticles />
 
-{/* Mobile-only notice */}
-<motion.p
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ delay: 0.5, duration: 0.5 }}
-    className="text-[10px] sm:hidden text-indigo-300/70 tracking-wider mb-6 -mt-2"
->
-  (View on desktop for interactive particle physics)
-</motion.p>
+              {/* Mobile-only notice */}
+              <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.5, duration: 0.5 }}
+                  className="text-[10px] sm:hidden text-indigo-300/70 tracking-wider mb-6 -mt-2"
+              >
+                (View on desktop for interactive particle physics)
+              </motion.p>
 
+              {/* 2. Updated to the human-sounding hero text! */}
               <motion.p
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2, duration: 0.5 }}
                   className="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto"
               >
-                I’ve worked on data-heavy tools like UPS analytics dashboards and
-                interactive platforms that combine clean engineering, strong UX,
-                and real-world impact.
+                I build software that makes sense of messy data. From tracking supply chain volume at UPS to designing interactive 3D web experiences, I focus on turning complex systems into tools people actually want to use.
               </motion.p>
 
               <motion.div
