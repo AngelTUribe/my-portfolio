@@ -17,10 +17,10 @@ const projects = [
       href: "https://docs.google.com/presentation/d/1U0gAiyFit29W713CHxUmyj0MLZzQ3jQR/edit?usp=sharing&ouid=114224006013548134712&rtpof=true&sd=true"
   },
   {
-      title: "Smart City Traffic Optimization",
-      description: "A machine learning simulation that uses PPO (Proximal Policy Optimization) to coordinate traffic lights and actively reduce gridlock in a virtual city.",
-      tags: ["Python", "RL", "SB3"],
-      href: "https://github.com/AngelTUribe/YOUR_TRAFFIC_REPO" 
+      title: "Placeholder Project for this Summer. Ima make something insane and update this when it's done :)",
+      description: "tbd",
+      tags: ["Cat"],
+      href: "https://www.youtube.com/shorts/t6PvC-IUiqw" 
   },
   {
       title: "Interactive Portfolio",
