@@ -16,10 +16,10 @@ export default function AboutSection() {
                 About Me
               </h2>
               <p className="text-lg text-slate-300 leading-relaxed">
-                I&apos;m a full-stack developer focused on data-heavy systems, clean UX, and tools people actually rely on.
+               I’m currently studying Computer Science at UGA, where I spend a lot of my time bridging the gap between low-level systems and high-end visualization.
               </p>
               <p className="text-lg text-slate-300 leading-relaxed">
-                My work sits at the intersection of analytics, visualization, and robust engineering.
+                When I'm not writing React or D3 for analytics dashboards, you can probably find me debugging C projects on the odin server or using everything I learned in computer architecture.
               </p>
               <div className="pt-4">
                 <h3 className="text-sm font-semibold text-slate-300 uppercase tracking-wide mb-4">
