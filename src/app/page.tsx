@@ -84,13 +84,14 @@ export default function Home() {
               >
                 <Link
                 href="/resume.pdf"
+                target="_blank"
                 className="inline-flex items-center gap-2 rounded-full bg-slate-50 text-slate-900 px-6 py-2 text-xs sm:text-sm font-medium hover:bg-slate-200 transition"
               >
               <FileText size={16} />
                View Resume
               </Link>
               <Link
-               href="https://github.com/YOUR_GITHUB_USERNAME" // <-- Add your actual GitHub URL here
+               href="https://github.com/AngelTUribe" // <-- Add your actual GitHub URL here
                target="_blank"
                 className="inline-flex items-center gap-2 rounded-full border border-slate-500/70 text-slate-100 px-5 py-2 text-xs sm:text-sm hover:border-slate-100 hover:bg-slate-900/40 transition"
               >
