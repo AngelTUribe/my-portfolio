@@ -5,7 +5,7 @@ export default function AboutSection() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="flex justify-center md:justify-start">
               <img
-                  src="/headshot.jpg"
+                  src="./headshot.jpg"
                   alt="Profile headshot"
                   className="w-full max-w-sm rounded-lg object-cover border border-slate-700/70 bg-slate-900/70 backdrop-blur-xl shadow-[0_18px_70px_rgba(2,6,23,0.95)]"
               />
