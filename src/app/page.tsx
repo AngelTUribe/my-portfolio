@@ -17,10 +17,10 @@ const projects = [
       href: "https://docs.google.com/presentation/d/1U0gAiyFit29W713CHxUmyj0MLZzQ3jQR/edit?usp=sharing&ouid=114224006013548134712&rtpof=true&sd=true"
   },
   {
-      title: "Placeholder Project for this Summer. Ima make something insane and update this when it's done :)",
-      description: "tbd",
-      tags: ["Cat"],
-      href: "https://www.youtube.com/shorts/t6PvC-IUiqw" 
+      title: "Spacial Hand Environment",
+      description: "A real-time hand tracking and gesture recognition system built with TensorFlow.js and MediaPipe. It detects hand landmarks and recognizes gestures to control a 3D environment!",
+      tags: ["TensorFlow.js", "MediaPipe", "Three.js", "React"],
+      href: "https://angelturibe.github.io/swarm-body/" 
   },
   {
       title: "Interactive Portfolio",
@@ -75,7 +75,7 @@ export default function Home() {
                   transition={{ delay: 0.2, duration: 0.5 }}
                   className="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto"
               >
-                I build software that makes sense of messy data. From tracking supply chain volume at UPS to designing interactive 3D web experiences, I focus on turning complex systems into tools people actually want to use.
+                Hi, I'm Angel! I'm a senior at The University of Georgia studying computer science. I have a passion for building fun react applications and visualizing data. Welcome to my portfolio!
               </motion.p>
 
               <motion.div

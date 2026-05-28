@@ -16,10 +16,10 @@ export default function AboutSection() {
                 About Me
               </h2>
               <p className="text-lg text-slate-300 leading-relaxed">
-               I’m currently studying Computer Science at UGA, where I spend a lot of my time bridging the gap between low-level systems and high-end visualization.
+               I’m currently studying Computer Science at UGA, where I’ve had the chance to explore a wide range of topics from algorithms and data structures to machine learning and computer architecture. 
               </p>
               <p className="text-lg text-slate-300 leading-relaxed">
-                When I'm not writing React or D3 for analytics dashboards, you can probably find me debugging C projects on the odin server or using everything I learned in computer architecture.
+                I love making fun websites with React, and finding cool ways to visualize data. i am also a huge fan of 3d graphics and some game development!
               </p>
               <div className="pt-4">
                 <h3 className="text-sm font-semibold text-slate-300 uppercase tracking-wide mb-4">
@@ -32,7 +32,6 @@ export default function AboutSection() {
                     "React",
                     "Tailwind CSS",
                     "Node.js",
-                    "PostgreSQL",
                     "D3.js",
                   ].map((tech) => (
                       <span

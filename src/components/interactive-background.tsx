@@ -10,7 +10,6 @@ function WaveField() {
     const pointsRef = useRef<THREE.Points>(null)
     const scrollRef = useRef(0)
 
-    // Scroll -> normalized progress 0..1
     useEffect(() => {
         const handleScroll = () => {
             const { scrollY, innerHeight } = window
@@ -24,7 +23,6 @@ function WaveField() {
         return () => window.removeEventListener("scroll", handleScroll)
     }, [])
 
-    // Build scattered grid of points
     const { positions, colors } = useMemo(() => {
         const cols = 220
         const rows = 85
@@ -33,9 +31,9 @@ function WaveField() {
         const pos = new Float32Array(total * 3)
         const col = new Float32Array(total * 3)
 
-        const colorLow = new THREE.Color("#020817")   // bg tone
-        const colorMid = new THREE.Color("#4f46e5")   // indigo
-        const colorHigh = new THREE.Color("#a855f7")  // magenta
+        const colorLow = new THREE.Color("#020817")   
+        const colorMid = new THREE.Color("#4f46e5")   
+        const colorHigh = new THREE.Color("#a855f7")  
 
         const width = 90
         const depth = 90
@@ -51,7 +49,6 @@ function WaveField() {
                 const baseX = u * width * 0.5
                 const baseZ = v * depth * 0.5
 
-                // jitter so it’s not uniform lines
                 const jitterScaleX = 0.8
                 const jitterScaleZ = 0.8
                 const px = baseX + (Math.random() - 0.5) * jitterScaleX
@@ -61,8 +58,7 @@ function WaveField() {
                 pos[i3 + 1] = 0
                 pos[i3 + 2] = pz
 
-                // gradient + punch
-                const t = (v + 1) / 2 // 0..1
+                const t = (v + 1) / 2 
                 const grad = colorLow
                     .clone()
                     .lerp(colorMid, t * 1.1)
@@ -152,8 +148,8 @@ function WaveField() {
                 <PointMaterial
                     transparent
                     vertexColors
-                    size={0.09}                 // solid but not chunky
-                    sizeAttenuation              // bigger when close, smaller when far
+                    size={0.09}               
+                    sizeAttenuation              
                     depthWrite={false}
                     opacity={0.95}
                     blending={THREE.AdditiveBlending}

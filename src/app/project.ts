@@ -10,7 +10,7 @@ export const projects: Project[] = [
         title: "Building Output Analyzer (UPS)",
         description: "An internal analytics dashboard built for UPS to visualize outbound volume. I used D3.js and React to map data and show the distribution of packages across the country with interactive maps, line charts, and anomaly surfacing.",
         tags: ["React", "D3", "Node", "MySQL"],
-        href: "https://docs.google.com/presentation/d/1U0gAiyFit29W713CHxUmyj0MLZzQ3jQR/edit?usp=sharing&ouid=114224006013548134712&rtpof=true&sd=true"
+        href: "https://www.linkedin.com/feed/update/urn:li:activity:7365563507485884416/"
     },
     {
         title: "Smart City Traffic Optimization",
